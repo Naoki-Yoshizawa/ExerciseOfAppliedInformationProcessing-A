@@ -1,0 +1,6 @@
+Product Answer = 0.800E+01  Division Answer = 0.200E+01
+Product Answer = 0.100E+02  Division Answer = 0.250E+01
+Product Answer = 0.300E+01  Division Answer = 0.300E+01
+Product Answer = 0.800E+01  Division Answer = 0.200E+01
+Product Answer = 0.100E+03  Division Answer = 0.250E+02
+Product Answer = 0.150E+03  Division Answer = 0.167E+02
