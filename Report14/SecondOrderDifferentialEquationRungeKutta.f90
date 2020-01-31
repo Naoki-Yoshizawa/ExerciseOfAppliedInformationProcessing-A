@@ -28,28 +28,7 @@ xa = xs
 write(11,*) ta,xa
 
 do i=1,div
-  kz1 = Fz(ta,za,xa)
-  kx1 = Fx(ta,za,xa)
-
-  ta2 = ta+h/2
-  ya2 = ya+h*kx1/2
-  k2 = Fxy(xa2,ya2)
-
-  xa3 = xa+h/2
-  ya3 = ya+h*k2/2
-  k3 = Fxy(xa3,ya3)
-
-  xa4 = xa+h
-  ya4 = ya+h*k3
-  k4 = Fxy(xa4,ya4)
-
-  xb = xa+h
-  yb = Rungekuttafunc(ya,h,k1,k2,k3,k4)
-
-  write(11,*) xb,yb
-
-  xa = xb
-  ya = yb
+  
 end do
 
 close (11)
