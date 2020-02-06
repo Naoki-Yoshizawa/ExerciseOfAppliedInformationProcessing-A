@@ -2,8 +2,56 @@ program SecondOrderRungeKutta
 !---------------------------------------------------------------
 implicit none
 integer i,div
-
+double precision xs,ys,zs,xf
+double precision xa,xb,ya,yb,za,zb,h
+double precision xa2,xa3,xa4,ya2,ya3,ya4,za2,za3,za4
+double precision kf1,kf2,kf3,kf4,kg1,kg2,kg3,kg4
+double precision F,G,Rungekuttafunc
 !---------------------------------------------------------------
+open(11,file = 'Output.txt',status = 'replace')
+
+write(*,*) 'Input xs,ys,zs'
+read(*,*) xs,ys,zs
+
+write(*,*) 'Input xf'
+read(*,*) xf
+
+write(*,*) 'Input divison number'
+read(*,*) div
+
+h = (xf-xs)/div
+
+xa = xs
+ya = ys
+za = zs
+
+write(11,*) xa,ya,za
+
+do i=1,div
+  kf1 = F(xa,za)
+
+  xa2 = xa+h/2
+  za2 = za+h*kf1/2
+  kf2 = F(xa2,za2)
+
+  xa3 = xa+h/2
+  za3 = za+h*kf2/2
+  kf3 = F(xa3,za3)
+
+  xa4 = xa+h
+  za4 = za+h*kf3
+  kf4 = F(xa4,za4)
+
+  xb = xa+h
+  zb = Rungekuttafunc(za,h,kf1,kf2,kf3,kf4)
+
+  write(11,*) xb,zb
+
+  xa = xb
+  za = zb
+end do
+
+close (11)
 
 end program SecondOrderRungeKutta
 
@@ -14,6 +62,9 @@ implicit none
 double precision a,b
 double precision x,z
 !---------------------------------------------------------------
+a = 1
+b = 3
+
 F = -a*z-b*x
 
 return
