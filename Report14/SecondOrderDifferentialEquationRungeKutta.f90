@@ -68,8 +68,8 @@ implicit none
 double precision a,b
 double precision y,z
 !---------------------------------------------------------------
-a = 1
-b = 3
+a = 3
+b = 2
 
 F = -a*z-b*y
 
