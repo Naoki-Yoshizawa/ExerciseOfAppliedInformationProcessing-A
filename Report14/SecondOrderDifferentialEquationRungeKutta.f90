@@ -4,7 +4,7 @@ implicit none
 integer i,div
 double precision xs,ys,zs,xf
 double precision xa,xb,ya,yb,za,zb,h
-double precision xa2,xa3,xa4,ya2,ya3,ya4,za2,za3,za4
+double precision xa2,xa3,xa4,za2,za3,za4
 double precision kf1,kf2,kf3,kf4,kg1,kg2,kg3,kg4
 double precision F,G,Rungekuttafunc
 !---------------------------------------------------------------
@@ -29,25 +29,31 @@ write(11,*) xa,ya,za
 
 do i=1,div
   kf1 = F(xa,za)
+  kg1 = G(za)
 
   xa2 = xa+h/2
   za2 = za+h*kf1/2
   kf2 = F(xa2,za2)
+  kg2 = G(za2)
 
   xa3 = xa+h/2
   za3 = za+h*kf2/2
   kf3 = F(xa3,za3)
+  kg3 = G(za3)
 
   xa4 = xa+h
   za4 = za+h*kf3
   kf4 = F(xa4,za4)
+  kg4 = G(za4)
 
   xb = xa+h
+  yb = Rungekuttafunc(ya,h,kg1,kg2,kg3,kg4)
   zb = Rungekuttafunc(za,h,kf1,kf2,kf3,kf4)
 
-  write(11,*) xb,zb
+  write(11,*) xb,yb,zb
 
   xa = xb
+  ya = yb
   za = zb
 end do
 
