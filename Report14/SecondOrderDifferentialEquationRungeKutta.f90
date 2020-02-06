@@ -4,7 +4,7 @@ implicit none
 integer i,div
 double precision xs,ys,zs,xf
 double precision xa,xb,ya,yb,za,zb,h
-double precision xa2,xa3,xa4,za2,za3,za4
+double precision xa2,xa3,xa4,ya2,ya3,ya4,za2,za3,za4
 double precision kf1,kf2,kf3,kf4,kg1,kg2,kg3,kg4
 double precision F,G,Rungekuttafunc
 !---------------------------------------------------------------
@@ -28,22 +28,22 @@ za = zs
 write(11,*) xa,ya,za
 
 do i=1,div
-  kf1 = F(xa,za)
+  kf1 = F(ya,za)
   kg1 = G(za)
 
-  xa2 = xa+h/2
+  ya2 = ya+h*kg1/2
   za2 = za+h*kf1/2
-  kf2 = F(xa2,za2)
+  kf2 = F(ya2,za2)
   kg2 = G(za2)
 
-  xa3 = xa+h/2
+  ya3 = ya+h*kg2/2
   za3 = za+h*kf2/2
-  kf3 = F(xa3,za3)
+  kf3 = F(ya3,za3)
   kg3 = G(za3)
 
-  xa4 = xa+h
+  ya4 = ya+h*kg3
   za4 = za+h*kf3
-  kf4 = F(xa4,za4)
+  kf4 = F(ya4,za4)
   kg4 = G(za4)
 
   xb = xa+h
@@ -62,16 +62,16 @@ close (11)
 end program SecondOrderRungeKutta
 
 !=========================================================================
-double precision function F(x,z)
+double precision function F(y,z)
 !---------------------------------------------------------------
 implicit none
 double precision a,b
-double precision x,z
+double precision y,z
 !---------------------------------------------------------------
 a = 1
 b = 3
 
-F = -a*z-b*x
+F = -a*z-b*y
 
 return
 
